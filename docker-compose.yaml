@@ -1,0 +1,49 @@
+services:
+  graphql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: graphql-demo
+    container_name: demo-graphql
+    ports:
+      - "9090:9090"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://graphql-db:5432/graphql_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    networks:
+      - graphql-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9090/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  db:
+    image: postgres:latest
+    container_name: graphql-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=graphql_db
+    volumes:
+      - graphql-data:/var/lib/postgresql/data
+    networks:
+      - graphql-network
+    healthcheck:
+      test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
+      timeout: 5s
+      interval: 5s
+      retries: 10
+
+networks:
+  graphql-network:
+    driver: bridge
+
+volumes:
+  graphql-data:
