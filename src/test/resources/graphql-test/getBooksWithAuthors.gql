@@ -6,6 +6,7 @@ query books {
         author {
             id
             name
+            age
         }
     }
 }

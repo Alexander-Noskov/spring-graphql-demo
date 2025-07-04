@@ -1,0 +1,12 @@
+query authorById($id: ID!) {
+    authorById(id: $id) {
+        id
+        name
+        age
+        books {
+            id
+            name
+            pageCount
+        }
+    }
+}

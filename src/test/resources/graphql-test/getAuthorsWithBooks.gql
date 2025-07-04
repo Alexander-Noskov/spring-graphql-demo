@@ -1,0 +1,12 @@
+query authors {
+    authors {
+        id
+        name
+        age
+        books {
+            id
+            name
+            pageCount
+        }
+    }
+}

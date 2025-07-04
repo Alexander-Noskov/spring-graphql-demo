@@ -1,0 +1,7 @@
+query books {
+    books {
+        id
+        name
+        pageCount
+    }
+}

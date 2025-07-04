@@ -1,0 +1,7 @@
+mutation addAuthor($input: AuthorCreateInput!){
+    addAuthor(input: $input) {
+        id
+        name
+        age
+    }
+}
