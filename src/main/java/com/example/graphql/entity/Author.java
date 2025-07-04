@@ -1,9 +1,7 @@
 package com.example.graphql.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = "books")
+@EqualsAndHashCode(exclude = "books")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
