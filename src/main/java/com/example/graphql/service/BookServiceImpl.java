@@ -71,11 +71,9 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public boolean deleteBook(Integer id) {
-        if (bookRepository.existsById(id)) {
-            bookRepository.deleteById(id);
-            return true;
-        }
-        return false;
+        Book book = findById(id, false);
+        bookRepository.delete(book);
+        return true;
     }
 
 }

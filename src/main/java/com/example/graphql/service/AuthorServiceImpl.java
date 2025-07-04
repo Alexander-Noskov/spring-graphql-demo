@@ -46,8 +46,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public Author updateAuthor(Integer id, AuthorUpdate author) {
-        Author updateAuthor = authorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Author not found"));
+        Author updateAuthor = findById(id, false);
         if (author.age() != null) updateAuthor.setAge(author.age());
         if (author.name() != null) updateAuthor.setName(author.name());
         return updateAuthor;
@@ -56,10 +55,8 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     @Transactional
     public boolean deleteAuthor(Integer id) {
-        if (authorRepository.existsById(id)) {
-            authorRepository.deleteById(id);
-            return true;
-        }
-        return false;
+        Author author = findById(id, false);
+        authorRepository.delete(author);
+        return true;
     }
 }
