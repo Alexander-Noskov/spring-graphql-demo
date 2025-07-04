@@ -4,3 +4,6 @@
 - GraphQL
 - PostgreSQL
 - Flyway
+- Mockito
+- Testcontainers
+- Docker-compose
