@@ -11,9 +11,10 @@ services:
       db:
         condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://graphql-db:5432/graphql_db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/graphql_db
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_FLYWAY_URL=jdbc:postgresql://db:5432/graphql_db
     networks:
       - graphql-network
     healthcheck:
